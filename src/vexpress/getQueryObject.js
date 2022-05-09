@@ -1,0 +1,6 @@
+module.exports = function () {
+    const querystring = require('querystring')
+    const qs = window.location.search
+    const qsObj = querystring.parse(qs)
+    return qsObj
+}

@@ -1,3 +1,6 @@
+// Throw Error if window isn't defined
+if (!window) throw new Error('window is not defined')
+
 // Import packages
 const path = require('path')
 const vexpress = require('./vexpress/vexpr')
@@ -10,16 +13,21 @@ const router = require('./lib/router/router.js')
 app.setRouter(router)
 router.setApp(app)
 
-// Export to browser
-if (window) {
-    // Export default node packages
-    window.path = path
+// Session
+require('./lib/session.js')
 
-    // Export simulated "express" app to browser
-    window.app = app
+// On load
+window.addEventListener('DOMContentLoaded', () => {
+    // Set Route to current location
+    router.setRoute(window.location.pathname)
+})
 
-    // Export router as $router to browser
-    window.$router = router
-} else {
-    throw new Error('window is not defined')
-}
+// ############################### Export to browser ###############################
+// Export default node packages
+window.path = path
+
+// Export simulated "express" app to browser
+window.app = app
+
+// Export router as $router to browser
+window.$router = router

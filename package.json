@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "setup": "npm install && npm run config",
     "config": "python setup.py",
-    "build": "browserify src/main.js -o dist/browserfied.js && babel dist/browserfied.js -o dist/main.js && uglifyjs dist/main.js -o dist/bundle.js"
+    "build": "browserify src/main.js -o dist/browserfied.js && babel dist/browserfied.js -o dist/main.js && uglifyjs dist/main.js -o dist/bundle.js",
+    "try": "node $try.js"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,8 @@
     "@babel/preset-env": "^7.11.5",
     "browserify": "^17.0.0",
     "uglify-js": "^3.10.4"
+  },
+  "dependencies": {
+    "querystring": "^0.2.1"
   }
 }
