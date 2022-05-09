@@ -19,6 +19,15 @@
                 res.send('<a href="https://google.com">Google</a>')
                 res.send('<br>')
                 res.send('<a href="#">Stay here</a>')
+
+                if (req.session.auth.loggedin) {
+                    res.send('<br>')
+                    res.send(`<h1>Hello, ${req.session.auth.name}!</h1>`)
+                    res.send('<a href="/auth/logout">Logout</a>')
+                } else {
+                    res.send('<br>')
+                    res.send('<a href="/auth/github">Login</a>')
+                }
             })
 
             app.get('/super-shitty-page', (req, res) => {
@@ -26,6 +35,8 @@
                 res.send('<h1>Super shitty page</h1>')
                 res.send('<a href="/">Go back</a>')
             })
+
+            app.use(Auth.github())
         </script>
         <!-- End backend.js -->
     </head>

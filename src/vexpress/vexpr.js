@@ -1,17 +1,25 @@
-const { route } = require('express/lib/application');
 const getQueryObject = require('./getQueryObject')
+
+function removeSlashesAtEnd (string) {
+    while (string.endsWith('/')) {
+        string = string.slice(0, -1)
+    }
+
+    return string
+}
 
 function getReq (requestType, routePath, app) {
     let req = {
         method: requestType,
-        url: routePath,
+        url: removeSlashesAtEnd(routePath) === '' ? '/' : removeSlashesAtEnd(routePath),
         headers: {
             cookie: document.cookie
         },
         body: {},
         params: {},
         query: getQueryObject(),
-        session: window.session
+        session: window.session,
+        getApp: () => app
     }
     req.cookies = (function parseAndGetCookies() {
         const cookies = {}

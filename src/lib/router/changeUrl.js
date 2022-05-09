@@ -4,7 +4,7 @@ function isAbsoluteUrl(url) {
 }
 
 module.exports = function (newUrl) {
-    if (!isAbsoluteUrl(newUrl)) return window.history.pushState({}, '', newUrl)
+    if (!isAbsoluteUrl(newUrl)) return window.history.pushState({}, '', newUrl + location.search)
     window.location = newUrl
     return '::EXTERNAL_URL'
 }
